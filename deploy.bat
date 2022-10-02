@@ -1,1 +1,1 @@
-echo Deploying the Project from GIT: %date% ::: %time%
+echo Deploying the Project from GIT: %date% : %time%
