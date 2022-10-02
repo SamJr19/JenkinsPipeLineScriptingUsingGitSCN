@@ -1,1 +1,1 @@
-echo Validating the Project from GIT: %date% ::: %time%
+echo Validating the Project from GIT: %date% : %time%
