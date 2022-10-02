@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Building files from GIT Repo') {
+            steps {
+                echo 'Files from GIT repo has been build successfully:'
+                git branch: 'main', credentialsId: '23add84b-8293-4d4f-826a-8fb44ee4163c', url: 'https://github.com/SamJr19/JenkinsPipeLineScriptingUsingGitSCN.git'
+            }
+        }
+        stage('Compling the files') {
+            steps {
+                echo 'Files are compiled successfuly'
+                bat 'build.bat'
+            }
+        }
+        stage('Running the compiled version of the file') {
+            steps {
+                echo 'File has been run successfuly'
+                bat 'complile.bat'
+                bat 'qa_sanity.bat'
+            }
+        }
+        stage('Deploying the file') {
+            steps {
+                echo 'Deployment is successful:'
+                bat 'deploy.bat'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Runs always'
+        }
+        success {
+            echo 'Runs when build is successful'
+        }
+        failure {
+            echo 'Runs when build fails'
+        }
+        changed {
+            echo 'Runs when there are some changes committed'
+        }
+        unstable {
+            echo 'Runs when the build is very unstable'
+        }
+        
+    }
+}
